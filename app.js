@@ -1,4 +1,5 @@
 import express from "express";
+import { validate } from "./08_Test-MiddleWare/validate.middleware";
 const app = express();
 
 app.use(express.json());
@@ -14,6 +15,10 @@ app.post("/user", (req, res) => {
   } else {
     res.status(400).send({ error: "Name is required" });
   }
+});
+
+app.get("/secure", validate, (req, res) => {
+  res.status(200).send("You are Authorized");
 });
 
 export default app;
